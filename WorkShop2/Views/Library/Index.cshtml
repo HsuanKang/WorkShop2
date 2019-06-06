@@ -1,4 +1,6 @@
-﻿
+﻿@using System.Data
+@model System.Data.DataSet
+
 @{
     ViewBag.Title = "Index";
 }
@@ -23,3 +25,31 @@
     <option>不可借</option>
     <option>已租未領</option>
 </select><br />
+
+<table border="1">
+    <tr>
+        <th>書籍編號</th>
+        <th>書籍名稱</th>
+        <th>書籍種類</th>
+        <th>作者</th>
+        <th>購買日期</th>
+        <th>出版商</th>
+        <th>書籍簡介</th>
+        <th>狀態</th>
+        <th>保管者</th>
+    </tr>
+    @foreach (DataRow row in Model.Tables[0].Rows)
+    {
+        <tr>
+            <td>@row["BOOK_ID"]</td>
+            <td>@row["BOOK_NAME"]</td>
+            <td>@row["BOOK_CLASS_ID"]</td>
+            <td>@row["BOOK_AUTHOR"]</td>
+            <td>@row["BOOK_BOUGHT_DATE"]</td>
+            <td>@row["BOOK_PUBLISHER"]</td>
+            <td>@row["BOOK_NOTE"]</td>
+            <td>@row["BOOK_STATUS"]</td>
+            <td>@row["BOOK_KEEPER"]</td>
+        </tr>
+    }
+</table>

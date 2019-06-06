@@ -18,15 +18,15 @@ namespace WorkShop2.Controllers
 
         public ActionResult Index()
         {
-            DataTable table = new DataTable();
+            DataTable data = new DataTable();
             SqlConnection conn = new SqlConnection(DBstr());
             String sql = "Select * From [dbo].[BOOK_DATA]";
             SqlCommand scm = new SqlCommand(sql, conn);
             SqlDataAdapter adapter = new SqlDataAdapter(scm);
             DataSet dataSet = new DataSet();
-            adapter.Fill(dataSet);
-            table = dataSet.Tables[0];
-            return View();
+            adapter.Fill(dataSet, "data");
+            data = dataSet.Tables[0];
+            return View(dataSet);
         }
     }
 }
