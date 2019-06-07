@@ -4,27 +4,46 @@
 @{
     ViewBag.Title = "Index";
 }
+<head>
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.1.221/styles/kendo.bootstrap-v4.min.css" />
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+
+
+    <script src="https://kendo.cdn.telerik.com/2018.1.221/js/jquery.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2018.1.221/js/kendo.all.min.js"></script>
+</head>
+
 
 <h2>查詢書籍</h2>
-書籍名稱 <input type="text" name="bookname" /><br />
-書籍類別 <select id="category">
-    <option>Comics</option>
-    <option>DataBase</option>
-    <option>Finance</option>
-    <option>Program</option>
-</select><br />
-保管人 <select id="memeber">
-    <option>Jenny</option>
-    <option>Jessica</option>
-    <option>Sam</option>
-    <option>Elsa</option>
-</select><br />
-書籍狀態 <select id="status">
-    <option>可租借</option>
-    <option>不可租</option>
-    <option>不可借</option>
-    <option>已租未領</option>
-</select><br />
+<div align="center">
+    書籍名稱 <input type="text" class="k-textbox" /><br />
+    書籍類別 <select id="category">
+        <option>Comics</option>
+        <option>DataBase</option>
+        <option>Finance</option>
+        <option>Program</option>
+    </select><br />
+    現保管人 <select id="memeber">
+        <option>Jenny</option>
+        <option>Jessica</option>
+        <option>Sam</option>
+        <option>Elsa</option>
+    </select><br />
+    書籍狀態 <select id="status">
+        <option>可租借</option>
+        <option>不可租</option>
+        <option>不可借</option>
+        <option>已租未領</option>
+    </select><br />
+    <span class="btn btn-warning">新增</span>
+    <span class="btn btn-success">查詢</span>
+    <span class="btn btn-info">清除</span>
+</div>
+
+<script>$("#category").kendoDropDownList();</script>
+<script>$("#memeber").kendoDropDownList();</script>
+<script>$("#status").kendoDropDownList();</script>
 
 <table border="1">
     <tr>
@@ -53,3 +72,41 @@
         </tr>
     }
 </table>
+
+<div id="example">
+    <div id="grid">5555</div>
+    <script>
+        $(document).ready(function () {
+            $("#grid").kendoGrid({
+                dataSource: {
+                    type: "json",
+                    transport: {
+                        read: @ViewBag.jstr,
+                    },
+                    pageSize: 20
+                },
+                height: 550,
+                groupable: true,
+                sortable: true,
+                pageable: {
+                    refresh: true,
+                    pageSizes: true,
+                    buttonCount: 5
+                },
+                columns: [{
+                    field: "BOOK_ID",
+                    title: "BOOK_ID",
+                }, {
+                    field: "BOOK_NAME",
+                    title: "BOOK_NAME"
+                }, {
+                    field: "BOOK_CLASS_ID",
+                    title: "BOOK_CLASS_ID"
+                }, {
+                    field: "BOOK_AUTHOR",
+                    title: "BOOK_AUTHOR"
+                }]
+            });
+        });
+    </script>
+</div>
