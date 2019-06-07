@@ -16,97 +16,79 @@
 
 
 <h2>查詢書籍</h2>
-<div align="center">
-    書籍名稱 <input type="text" class="k-textbox" /><br />
-    書籍類別 <select id="category">
-        <option>Comics</option>
-        <option>DataBase</option>
-        <option>Finance</option>
-        <option>Program</option>
-    </select><br />
-    現保管人 <select id="memeber">
-        <option>Jenny</option>
-        <option>Jessica</option>
-        <option>Sam</option>
-        <option>Elsa</option>
-    </select><br />
-    書籍狀態 <select id="status">
-        <option>可租借</option>
-        <option>不可租</option>
-        <option>不可借</option>
-        <option>已租未領</option>
-    </select><br />
-    <span class="btn btn-warning">新增</span>
-    <span class="btn btn-success">查詢</span>
-    <span class="btn btn-info">清除</span>
-</div>
+@using (Html.BeginForm("Books", "Library", FormMethod.Post))
+{
+    <div align="center">
+        書籍名稱 <input type="text" class="k-textbox" /><br />
+        書籍類別 <select id="category">
+            <option>Comics</option>
+            <option>DataBase</option>
+            <option>Finance</option>
+            <option>Program</option>
+        </select><br />
+        現保管人 <select id="memeber">
+            <option>Jenny</option>
+            <option>Jessica</option>
+            <option>Sam</option>
+            <option>Elsa</option>
+        </select><br />
+        書籍狀態 <select id="status">
+            <option>可租借</option>
+            <option>不可租</option>
+            <option>不可借</option>
+            <option>已租未領</option>
+        </select><br />
+        <input type="submit" value="新增" class="btn btn-warning" onclick='this.form.action="Books"' />
+        <input type="submit" value="查詢" class="btn btn-success" onclick='this.form.action="Books"' />
+        <span class="btn btn-info">清除</span>
+    </div>
 
-<script>$("#category").kendoDropDownList();</script>
-<script>$("#memeber").kendoDropDownList();</script>
-<script>$("#status").kendoDropDownList();</script>
+    <script>$("#category").kendoDropDownList();</script>
+    <script>$("#memeber").kendoDropDownList();</script>
+    <script>$("#status").kendoDropDownList();</script>
 
-<table border="1">
-    <tr>
-        <th>書籍編號</th>
-        <th>書籍名稱</th>
-        <th>書籍種類</th>
-        <th>作者</th>
-        <th>購買日期</th>
-        <th>出版商</th>
-        <th>書籍簡介</th>
-        <th>狀態</th>
-        <th>保管者</th>
-    </tr>
-    @foreach (DataRow row in Model.Tables[0].Rows)
-    {
+    <table border="1">
         <tr>
-            <td>@row["BOOK_ID"]</td>
-            <td>@row["BOOK_NAME"]</td>
-            <td>@row["BOOK_CLASS_ID"]</td>
-            <td>@row["BOOK_AUTHOR"]</td>
-            <td>@row["BOOK_BOUGHT_DATE"]</td>
-            <td>@row["BOOK_PUBLISHER"]</td>
-            <td>@row["BOOK_NOTE"]</td>
-            <td>@row["BOOK_STATUS"]</td>
-            <td>@row["BOOK_KEEPER"]</td>
+            <th>書籍編號</th>
+            <th>書籍名稱</th>
+            <th>書籍種類</th>
+            <th>作者</th>
+            <th>購買日期</th>
+            <th>出版商</th>
+            <th>書籍簡介</th>
+            <th>狀態</th>
+            <th>保管者</th>
         </tr>
-    }
-</table>
+        @foreach (DataRow row in Model.Tables[0].Rows)
+        {
+            <tr>
+                <td>@row["BOOK_ID"]</td>
+                <td>@row["BOOK_NAME"]</td>
+                <td>@row["BOOK_CLASS_ID"]</td>
+                <td>@row["BOOK_AUTHOR"]</td>
+                <td>@row["BOOK_BOUGHT_DATE"]</td>
+                <td>@row["BOOK_PUBLISHER"]</td>
+                <td>@row["BOOK_NOTE"]</td>
+                <td>@row["BOOK_STATUS"]</td>
+                <td>@row["BOOK_KEEPER"]</td>
+            </tr>
+        }
+    </table>
 
-<div id="example">
-    <div id="grid">5555</div>
+    <div id="grid"></div>
     <script>
-        $(document).ready(function () {
-            $("#grid").kendoGrid({
-                dataSource: {
-                    type: "json",
-                    transport: {
-                        read: @ViewBag.jstr,
-                    },
-                    pageSize: 20
-                },
-                height: 550,
-                groupable: true,
-                sortable: true,
-                pageable: {
-                    refresh: true,
-                    pageSizes: true,
-                    buttonCount: 5
-                },
-                columns: [{
-                    field: "BOOK_ID",
-                    title: "BOOK_ID",
-                }, {
-                    field: "BOOK_NAME",
-                    title: "BOOK_NAME"
-                }, {
-                    field: "BOOK_CLASS_ID",
-                    title: "BOOK_CLASS_ID"
-                }, {
-                    field: "BOOK_AUTHOR",
-                    title: "BOOK_AUTHOR"
-                }]
-            });
+        var dataSource = new kendo.data.DataSource({
+            transport: {
+                read: {
+                    url: @ViewBag.jstr,
+                    dataType: "json"
+                }
+            },
+            pageSize: 10
+        });
+        $("#grid").kendoGrid({
+            dataSource: dataSource,
+            pageable: true
         });
     </script>
-</div>
+}

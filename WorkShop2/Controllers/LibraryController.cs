@@ -7,6 +7,9 @@ using System.Web;
 using System.Web.Mvc;
 using System.Xml;
 
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+
 namespace WorkShop2.Controllers
 {
     public class LibraryController : Controller
@@ -27,6 +30,7 @@ namespace WorkShop2.Controllers
             DataSet dataSet = new DataSet();
             adapter.Fill(dataSet, "data");
 
+            string str_json = JsonConvert.SerializeObject(dataSet, new DataTableConverter());
             String json = GetJson(dataSet);
             ViewBag.jstr = json;
             return View(dataSet);
@@ -35,13 +39,12 @@ namespace WorkShop2.Controllers
         public string GetJson(DataSet ds) //轉成Json
         {
             System.Web.Script.Serialization.JavaScriptSerializer serializer = new
-
             System.Web.Script.Serialization.JavaScriptSerializer();
-            List<Dictionary<string, object>> rows = new List<Dictionary<string, object>>();
-            Dictionary<string, object> row;
+            List<Dictionary<object, object>> rows = new List<Dictionary<object, object>>();
+            Dictionary<object, object> row;
             foreach (DataRow dr in ds.Tables[0].Rows)
             {
-                row = new Dictionary<string, object>();
+                row = new Dictionary<object, object>();
                 foreach (DataColumn col in ds.Tables[0].Columns)
                 {
                     row.Add(col.ColumnName, dr[col]);
