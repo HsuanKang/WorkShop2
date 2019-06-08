@@ -155,6 +155,7 @@
     <Compile Include="Models\Book.cs" />
     <Compile Include="Models\BookArg.cs" />
     <Compile Include="Models\BookService.cs" />
+    <Compile Include="Models\CodeService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -163,6 +164,7 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Library\Index.cshtml" />
+    <Content Include="Views\Library\Insert.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

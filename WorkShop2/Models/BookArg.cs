@@ -9,15 +9,15 @@ namespace WorkShop2.Models
     public class BookArg
     {
         [DisplayName("書籍名稱")]
-        public int BookName { get; set; }
+        public string BookName { get; set; }
 
         [DisplayName("類別編號")]
-        public int ClassId { get; set; }
+        public string ClassId { get; set; }
 
         [DisplayName("保管者")]
-        public int Keeper { get; set; }
+        public string Keeper { get; set; }
 
         [DisplayName("書籍狀態")]
-        public int Status { get; set; }
+        public string Status { get; set; }
     }
 }

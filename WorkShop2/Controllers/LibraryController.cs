@@ -15,6 +15,7 @@ namespace WorkShop2.Controllers
     public class LibraryController : Controller
     {
         // GET: Library
+        Models.CodeService codeService = new Models.CodeService();
         private string DBstr()
         {
             return System.Configuration.ConfigurationManager.ConnectionStrings["Contact"].ConnectionString.ToString();
@@ -52,6 +53,36 @@ namespace WorkShop2.Controllers
                 rows.Add(row);
             }
             return serializer.Serialize(rows);
+        }
+
+        [HttpGet()]
+        public ActionResult Insert() //新增畫面
+        {
+            ViewBag.BookNameCodeData = this.codeService.GetCodeTable("BOOKNAME");
+            ViewBag.AuthorCodeData = this.codeService.GetCodeTable("AUTHOR");
+            ViewBag.PublisherCodeData = this.codeService.GetCodeTable("PUBLISHER");
+            ViewBag.EmpCodeData = this.codeService.GetBook("0");
+            return View(new Models.Book());
+        }
+
+        [HttpPost()]
+        public ActionResult Insert(Models.Book book)
+        {
+            ViewBag.BookNameCodeData = this.codeService.GetCodeTable("BOOKNAME");
+            ViewBag.AuthorCodeData = this.codeService.GetCodeTable("AUTHOR");
+            ViewBag.PublisherCodeData = this.codeService.GetCodeTable("PUBLISHER");
+            ViewBag.EmpCodeData = this.codeService.GetBook("0");
+            if (ModelState.IsValid)
+            {
+                Models.BookService bookService = new Models.BookService();
+                if (book.BookName != null)
+                    book.BookName = book.BookName.Replace(",", "");
+                if (book.ClassId != null)
+                    book.ClassId = book.ClassId.Replace(",", "");
+                bookService.Insert(book);
+                TempData["message"] = "存檔成功";
+            }
+            return View(book);
         }
     }
 }

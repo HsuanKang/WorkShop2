@@ -15,29 +15,29 @@ namespace WorkShop2.Models
 
         [DisplayName("書籍名稱")]
         [Required(ErrorMessage = "此欄位必填")]
-        public int BookName { get; set; }
+        public string BookName { get; set; }
 
         [DisplayName("類別編號")]
         [Required(ErrorMessage = "此欄位必填")]
-        public int ClassId { get; set; }
+        public string ClassId { get; set; }
 
         [DisplayName("書籍作者")]
-        public int Author { get; set; }
+        public string Author { get; set; }
 
         [DisplayName("購買日期")]
-        public int BoughtDate { get; set; }
+        public string BoughtDate { get; set; }
 
         [DisplayName("出版商")]
-        public int Publisher { get; set; }
+        public string Publisher { get; set; }
 
         [DisplayName("書籍介紹")]
-        public int Note { get; set; }
+        public string Note { get; set; }
 
         [DisplayName("書籍狀態")]
         [Required(ErrorMessage = "此欄位必填")]
-        public int Status { get; set; }
+        public string Status { get; set; }
 
         [DisplayName("保管者")]
-        public int Keeper { get; set; }
+        public string Keeper { get; set; }
     }
 }
