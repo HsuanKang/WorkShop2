@@ -51,6 +51,7 @@ namespace WorkShop2.Models
                          "ON (dbo.BOOK_DATA.BOOK_NAME = dbo.CodeTable.CodeId AND dbo.CodeTable.CodeType = 'BOOKNAME')" +
                          "Where (UPPER(dbo.BOOK_DATA.BOOK_NAME) LIKE UPPER('%' + @BookName + '%')or @BookName = '')";
 
+
             using (SqlConnection conn = new SqlConnection(this.DBstr()))
             {
                 conn.Open();
@@ -73,15 +74,15 @@ namespace WorkShop2.Models
             {
                 result.Add(new Book()
                 {
-                    Id = (int)row["Id"],
-                    BookName = row["BookName"].ToString(),
-                    ClassId = row["ClassId"].ToString(),
-                    Author = row["Author"].ToString(),
-                    BoughtDate = row["BoughtDate"].ToString(),
-                    Publisher = row["Publisher"].ToString(),
-                    Note = row["Note"].ToString(),
-                    Status = row["Status"].ToString(),
-                    Keeper = row["Keeper"].ToString(),
+                    Id = (int)row["BOOK_ID"],
+                    BookName = row["BOOK_NAME"].ToString(),
+                    ClassId = row["BOOK_CLASS_ID"].ToString(),
+                    Author = row["BOOK_AUTHOR"].ToString(),
+                    BoughtDate = row["BOOK_BOUGHT_DATE"].ToString(),
+                    Publisher = row["BOOK_PUBLISHER"].ToString(),
+                    Note = row["BOOK_NOTE"].ToString(),
+                    Status = row["BOOK_STATUS"].ToString(),
+                    Keeper = row["BOOK_KEEPER"].ToString(),
                 });
             }
             return result;

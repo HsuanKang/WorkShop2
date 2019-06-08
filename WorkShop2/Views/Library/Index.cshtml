@@ -52,15 +52,12 @@
     <script>$("#memeber").kendoDropDownList();</script>
     <script>$("#status").kendoDropDownList();</script>
 
-    <table border="1">
+    <table border="1" align="center">
         <tr>
             <th>書籍編號</th>
             <th>書籍名稱</th>
             <th>書籍種類</th>
             <th>作者</th>
-            <th>購買日期</th>
-            <th>出版商</th>
-            <th>書籍簡介</th>
             <th>狀態</th>
             <th>保管者</th>
         </tr>
@@ -69,13 +66,10 @@
             <tr>
                 <td>@row["BOOK_ID"]</td>
                 <td>@row["BOOK_NAME"]</td>
-                <td>@row["BOOK_CLASS_ID"]</td>
+                <td>@row["BOOK_CLASS_NAME"]</td>
                 <td>@row["BOOK_AUTHOR"]</td>
-                <td>@row["BOOK_BOUGHT_DATE"]</td>
-                <td>@row["BOOK_PUBLISHER"]</td>
-                <td>@row["BOOK_NOTE"]</td>
-                <td>@row["BOOK_STATUS"]</td>
-                <td>@row["BOOK_KEEPER"]</td>
+                <td>@row["CODE_ID"]</td>
+                <td>@row["USER_NAME"]</td>
             </tr>
         }
     </table>

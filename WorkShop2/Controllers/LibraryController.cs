@@ -25,7 +25,11 @@ namespace WorkShop2.Controllers
         {
             DataTable data = new DataTable();
             SqlConnection conn = new SqlConnection(DBstr());
-            String sql = "Select * From [dbo].[BOOK_DATA]";
+            String sql = "Select [dbo].[BOOK_DATA].BOOK_ID, [dbo].[BOOK_DATA].BOOK_NAME, [dbo].[BOOK_CLASS].BOOK_CLASS_NAME, [dbo].[BOOK_DATA].BOOK_AUTHOR, [dbo].[CODE].CODE_ID, [dbo].[MEMBER].USER_NAME" +
+                         " From [dbo].[BOOK_DATA]" +
+                         " LEFT JOIN [dbo].[MEMBER] ON [dbo].[MEMBER].USER_ID = [dbo].[BOOK_DATA].BOOK_KEEPER" +
+                         " LEFT JOIN [dbo].[CODE] ON [dbo].[CODE].CODE_ID = [dbo].[BOOK_DATA].BOOK_STATUS" +
+                         " LEFT JOIN [dbo].[BOOK_CLASS] ON [dbo].[BOOK_CLASS].BOOK_CLASS_ID = [dbo].[BOOK_DATA].BOOK_CLASS_ID";
             SqlCommand scm = new SqlCommand(sql, conn);
             SqlDataAdapter adapter = new SqlDataAdapter(scm); //連接db
             DataSet dataSet = new DataSet();
