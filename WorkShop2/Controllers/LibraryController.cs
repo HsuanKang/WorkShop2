@@ -84,5 +84,14 @@ namespace WorkShop2.Controllers
             }
             return View(book);
         }
+
+        [HttpPost()]
+        public ActionResult Search(Models.BookArg barg)
+        {
+            Models.BookService bookService = new Models.BookService();
+            ViewBag.SearchResult = bookService.GetBookByCondition(barg);
+            ViewBag.BookNameCodeData = this.codeService.GetCodeTable("BOOKNAME");
+            return View("Index");
+        }
     }
 }

@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewBag.Title = "Search";
+}
+
+<h2>Search</h2>
+
+@if (ViewBag.SearchResult != null)
+{
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>編號</th>
+                <th>員工名稱</th>
+                <th>職稱</th>
+                <th>任職日期</th>
+                <th>性別</th>
+                <th>年齡</th>
+                <td></td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in (List<WorkShop2.Models.Book>)ViewBag.SearchResult)
+            {
+                <tr id='@item.Id'>
+                    <td>@item.BookName</td>
+                    <td>@item.ClassId</td>
+                    <td>@item.Status</td>
+                    <td>@item.Keeper</td>
+                    <td>@Html.ActionLink("修改", "UpdateEmployee", new { id = item.Id })</td>
+                    <td>
+                        <a class="btnDelete" href="#" onclick="test(this,'@item.Id');">刪除</a>
+                        <input class="hidEmployeeId" type="hidden" value='@item.Id' />
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

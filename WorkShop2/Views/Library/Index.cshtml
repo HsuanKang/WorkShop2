@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.1.221/styles/kendo.bootstrap-v4.min.css" />
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-    
+
     <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2019.2.514/styles/kendo.common.min.css" />
     <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2019.2.514/styles/kendo.blueopal.min.css" />
     <script src="http://kendo.cdn.telerik.com/2019.2.514/js/jquery.min.js"></script>
@@ -43,8 +43,8 @@
             <option>不可借</option>
             <option>已租未領</option>
         </select><br />
-        <input type="submit" value="新增" id="insert" class="btn btn-warning" onclick='this.form.action="Insert"'/>
-        <input type="submit" value="查詢" id="search" class="btn btn-success" onclick='this.form.action="Books"' />
+        <input type="submit" value="新增" id="insert" class="btn btn-warning" onclick='this.form.action="Insert"' />
+        <input type="submit" value="查詢" id="search" class="btn btn-success" onclick='this.form.action="Search"' />
         <span class="btn btn-info">清除</span>
     </div>
 
@@ -87,13 +87,8 @@
 <script type="text/javascript">
     $(document).ready(function () { //表單
         var dataSource = new kendo.data.DataSource({
-            transport: {
-                read: {
-                    url: @ViewBag.jstr,
-                    dataType: "json"
-                }
-            },
-            pageSize: 10
+            data: @ViewBag.jstr,
+            pageable:10
         });
         $("#grid").kendoGrid({
             dataSource: dataSource,
