@@ -166,6 +166,7 @@
     <Content Include="Views\Library\Index.cshtml" />
     <Content Include="Views\Library\Insert.cshtml" />
     <Content Include="Views\Library\Search.cshtml" />
+    <Content Include="Views\Library\Update.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -61,19 +61,26 @@
                 <th>作者</th>
                 <th>狀態</th>
                 <th>保管者</th>
+                <td></td>
+                <td></td>
             </tr>
         </thead>
         <tbody>
             @foreach (DataRow row in Model.Tables[0].Rows)
             {
-                <tr>
-                    <td>@row["BOOK_ID"]</td>
-                    <td>@row["BOOK_NAME"]</td>
-                    <td>@row["BOOK_CLASS_NAME"]</td>
-                    <td>@row["BOOK_AUTHOR"]</td>
-                    <td>@row["CODE_NAME"]</td>
-                    <td>@row["USER_NAME"]</td>
-                </tr>
+            <tr>
+                <td>@row["BOOK_ID"]</td>
+                <td>@row["BOOK_NAME"]</td>
+                <td>@row["BOOK_CLASS_NAME"]</td>
+                <td>@row["BOOK_AUTHOR"]</td>
+                <td>@row["CODE_NAME"]</td>
+                <td>@row["USER_NAME"]</td>
+                <td>@Html.ActionLink("修改", "Update", new { id = @row["BOOK_ID"] })</td>
+                <td>
+                    <a class="delete" href="#" onclick="test(this,'@row["BOOK_ID"]');">刪除</a>
+                    <input class="hidId" type="hidden" value='@row["BOOK_ID"]' />
+                </td>
+            </tr>
             }
         </tbody>
     </table>
@@ -114,5 +121,22 @@
             ],
             close: onClose
         }).data("kendoWindow").center().open();
+
+        $(".delete").click(function (e) { //刪除
+            e.preventDefault();
+            var tr = $(this).closest('tr')
+            $.ajax({
+                type: "POST",
+                url: "/Library/Delete",
+                data: "bookId=" + $(this).next().val(),
+                dataType: "json",
+                success: function (response) {
+                    $(tr).remove();
+                }, error: function (error) {
+                    alert("系統發生錯誤");
+                }
+            });
+            return false;
+        });
     });
 </script>

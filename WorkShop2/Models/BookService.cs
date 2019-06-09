@@ -87,5 +87,49 @@ namespace WorkShop2.Models
             }
             return result;
         }
+
+        public void DeleteBook(string bookId)
+        {
+            try
+            {
+                string sql = "Delete FROM [dbo].[BOOK_DATA] Where bookId=@BOOK_ID";
+                using (SqlConnection conn = new SqlConnection(this.DBstr()))
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    cmd.Parameters.Add(new SqlParameter("@BOOK_ID", bookId));
+                    cmd.ExecuteNonQuery();
+                    conn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void Update(string bookId)
+        {
+            try
+            {
+                string sql = "UPDATE [dbo].[BOOK_DATA]" +
+                             " SET BOOK_ID = @BOOK_ID, BOOK_NAME = @BOOK_NAME, BOOK_CLASS_ID = @BOOK_CLASS_ID" +
+                             ", BOOK_AUTHOR = @BOOK_AUTHOR, BOOK_STATUS = @BOOK_STATUS, BOOK_KEEPER = @BOOK_KEEPER" +
+                             " WHERE bookId=@BOOK_ID";
+
+                using (SqlConnection conn = new SqlConnection(this.DBstr()))
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    cmd.Parameters.Add(new SqlParameter("@BOOK_ID", bookId));
+                    cmd.ExecuteNonQuery();
+                    conn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

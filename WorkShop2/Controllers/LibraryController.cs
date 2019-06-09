@@ -41,7 +41,7 @@ namespace WorkShop2.Controllers
             return View(dataSet);
         }
 
-        public string GetJson(DataSet ds) //轉成Json
+        public string GetJson(DataSet ds) //轉Json
         {
             System.Web.Script.Serialization.JavaScriptSerializer serializer = new
             System.Web.Script.Serialization.JavaScriptSerializer();
@@ -90,12 +90,34 @@ namespace WorkShop2.Controllers
         }
 
         [HttpPost()]
-        public ActionResult Search(Models.BookArg barg)
+        public ActionResult Search(Models.BookArg barg) //查詢
         {
             Models.BookService bookService = new Models.BookService();
             ViewBag.SearchResult = bookService.GetBookByCondition(barg);
             ViewBag.BookNameCodeData = this.codeService.GetCodeTable("BOOKNAME");
             return View("Search");
+        }
+
+        [HttpPost()]
+        public JsonResult Delete(string bookId)
+        {
+            try
+            {
+                Models.BookService bookService = new Models.BookService();
+                bookService.DeleteBook(bookId);
+                return this.Json(true);
+            }
+            catch (Exception ex)
+            {
+                return this.Json(false);
+            }
+        }
+
+        public ActionResult Update(string bookId)
+        {
+            Models.BookService bookService = new Models.BookService();
+            bookService.Update(bookId);
+            return View("Update");
         }
     }
 }
