@@ -25,7 +25,7 @@ namespace WorkShop2.Controllers
         {
             DataTable data = new DataTable();
             SqlConnection conn = new SqlConnection(DBstr());
-            String sql = "Select [dbo].[BOOK_DATA].BOOK_ID, [dbo].[BOOK_DATA].BOOK_NAME, [dbo].[BOOK_CLASS].BOOK_CLASS_NAME, [dbo].[BOOK_DATA].BOOK_AUTHOR, [dbo].[CODE].CODE_ID, [dbo].[MEMBER].USER_NAME" +
+            String sql = "Select [dbo].[BOOK_DATA].BOOK_ID, [dbo].[BOOK_DATA].BOOK_NAME, [dbo].[BOOK_CLASS].BOOK_CLASS_NAME, [dbo].[BOOK_DATA].BOOK_AUTHOR, [dbo].[CODE].CODE_NAME, [dbo].[MEMBER].USER_NAME" +
                          " From [dbo].[BOOK_DATA]" +
                          " LEFT JOIN [dbo].[MEMBER] ON [dbo].[MEMBER].USER_ID = [dbo].[BOOK_DATA].BOOK_KEEPER" +
                          " LEFT JOIN [dbo].[CODE] ON [dbo].[CODE].CODE_ID = [dbo].[BOOK_DATA].BOOK_STATUS" +
@@ -95,7 +95,7 @@ namespace WorkShop2.Controllers
             Models.BookService bookService = new Models.BookService();
             ViewBag.SearchResult = bookService.GetBookByCondition(barg);
             ViewBag.BookNameCodeData = this.codeService.GetCodeTable("BOOKNAME");
-            return View("Index");
+            return View("Search");
         }
     }
 }

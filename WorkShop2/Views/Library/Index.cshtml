@@ -52,26 +52,30 @@
     <script>$("#memeber").kendoDropDownList();</script>
     <script>$("#status").kendoDropDownList();</script>
 
-    <table border="1" align="center">
-        <tr>
-            <th>書籍編號</th>
-            <th>書籍名稱</th>
-            <th>書籍種類</th>
-            <th>作者</th>
-            <th>狀態</th>
-            <th>保管者</th>
-        </tr>
-        @foreach (DataRow row in Model.Tables[0].Rows)
-        {
+    <table class="table table-bordered table-striped">
+        <thead>
             <tr>
-                <td>@row["BOOK_ID"]</td>
-                <td>@row["BOOK_NAME"]</td>
-                <td>@row["BOOK_CLASS_NAME"]</td>
-                <td>@row["BOOK_AUTHOR"]</td>
-                <td>@row["CODE_ID"]</td>
-                <td>@row["USER_NAME"]</td>
+                <th>書籍編號</th>
+                <th>書籍名稱</th>
+                <th>書籍種類</th>
+                <th>作者</th>
+                <th>狀態</th>
+                <th>保管者</th>
             </tr>
-        }
+        </thead>
+        <tbody>
+            @foreach (DataRow row in Model.Tables[0].Rows)
+            {
+                <tr>
+                    <td>@row["BOOK_ID"]</td>
+                    <td>@row["BOOK_NAME"]</td>
+                    <td>@row["BOOK_CLASS_NAME"]</td>
+                    <td>@row["BOOK_AUTHOR"]</td>
+                    <td>@row["CODE_NAME"]</td>
+                    <td>@row["USER_NAME"]</td>
+                </tr>
+            }
+        </tbody>
     </table>
 
     <div id="grid">Grid</div>

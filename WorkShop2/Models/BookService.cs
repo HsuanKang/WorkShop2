@@ -45,11 +45,11 @@ namespace WorkShop2.Models
         public List<Models.Book> GetBookByCondition(Models.BookArg barg) //條件搜尋書籍
         {
             DataTable data = new DataTable();
-            string sql = "SELECT dbo.BOOK_DATA.BOOK_NAME, dbo.BOOK_DATA.BOOK_CLASS_ID, dbo.BOOK_DATA.BOOK_KEEPER, dbo.BOOK_DATA.STATUS" +
-                         "FROM  dbo.BOOK_DATA" +
-                         "LEFT JOIN dbo.CodeTable" +
-                         "ON (dbo.BOOK_DATA.BOOK_NAME = dbo.CodeTable.CodeId AND dbo.CodeTable.CodeType = 'BOOKNAME')" +
-                         "Where (UPPER(dbo.BOOK_DATA.BOOK_NAME) LIKE UPPER('%' + @BookName + '%')or @BookName = '')";
+            string sql = "SELECT [dbo].[BOOK_DATA].BOOK_NAME, [dbo].[BOOK_DATA].BOOK_CLASS_ID, [dbo].[BOOK_DATA].BOOK_KEEPER, [dbo].[BOOK_DATA].STATUS" +
+                         "FROM  [dbo].[BOOK_DATA]" +
+                         "LEFT JOIN [dbo].[CodeTable]" +
+                         "ON ([dbo].[BOOK_DATA].BOOK_NAME = [dbo].[CodeTable].CodeId AND [dbo].[CodeTable].CodeType = 'BOOKNAME')" +
+                         "Where (UPPER([dbo].[BOOK_DATA].BOOK_NAME) LIKE UPPER('%' + @BookName + '%')or @BookName = '')";
 
 
             using (SqlConnection conn = new SqlConnection(this.DBstr()))
